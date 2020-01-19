@@ -1,0 +1,82 @@
+
+p {
+  margin: auto;
+}
+.appContainer {
+  display: flex;
+  max-width: 1300px;
+  margin: 40px auto;
+  justify-content: space-around;
+}
+.appCol {
+  flex: 1;
+  max-width: 24%;
+  box-sizing: border-box;
+}
+
+.card {
+  background: #F3F6FF;
+  border-radius: 20px;
+}
+
+.card .card_header {
+  padding: 15px;
+}
+
+.card .card_header .--title {
+}
+
+.card .card_content {
+  padding: 0 10px;
+  height: 400px;
+  overflow-y: auto;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.card .card_footer {
+  padding: 10px 15px;
+  border-radius: 0 0 20px 20px;
+  color: #7c7e82;
+  background: #E1E4EB;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputGroup .--input {
+  border-radius: 10px;
+  border: 1.5px solid #f3f6ff;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.inputGroup:last-child .--input {
+  margin-bottom: 0;
+}
+
+.appCol:first-child .card .card_content {
+  height: 185px;
+}
+
+.inputGroup .--label {
+    font-size: .8em;
+    padding: 5px 5px;
+    color: #747474;
+    font-weight: 600;
+}
+
+.inputGroup button {
+    max-width: 100px;
+    background: #a390ef;
+    border-radius: 15px;
+    color: #fff;
+}
+
+form {
+  background: #fff;
+  border-radius: 20px;
+  padding: 10px;
+}
