@@ -1,24 +1,29 @@
-import React from "react";
+import React, { Component } from "react";
 
-class Dropdown extends React.Component {
-  state = {
+class Dropdown extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       val: '',
-      data: ''
+      data: '',   
+    };
   }
   
-  selectPriority = e => {
-    let v = e.target.value
-    let id = e.target.id
-    e.preventDefault()
-    this.props.callBack(v, id)
+  selectPriority = ({ target: { id, value } }) => {
+    // e.preventDefault()
+    this.props.callBack(value, id);
   }
 
   render() {
-    let { id, pValue } = this.props
+    const { id, pValue } = this.props
 
     return (
       <div className='dd-item'>
-        <button value={pValue} id={id} onClick={this.selectPriority}>
+        <button 
+          value={pValue} 
+          id={id} 
+          onClick={this.selectPriority}
+        >
           {pValue}
         </button>
       </div>
@@ -26,4 +31,4 @@ class Dropdown extends React.Component {
   }
 }
 
-export default Dropdown
+export default Dropdown;

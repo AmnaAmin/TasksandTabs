@@ -1,34 +1,45 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { selectSong } from '../actions'
 
-class SongList extends React.Component {
-    renderList() {
-        return this.props.songs.map((song) => {
-            return (
-                <div key={song.title}>
-                    <div>{song.title}</div>
-                    <div>{song.duration}</div>
-                    <div>
-                        <button 
-                        onClick={() => this.props.selectSong(song)}
-                        >
-                            Select Song
-                        </button>
-                    </div>
-                </div>
-            )
-        })
-    }
-    render() {
-        console.log(this.props)
-        return <div> {this.renderList()} </div>
-    }
+// Should be a Functional Component but have no time for this conversion :p 
+// Just re-writing the logis ;)
+
+class SongList extends Component {
+  renderList() {
+    const { songs, selectSong } = this.props;
+
+    return songs.map((song) => {
+      return (
+        <div key={song.title}>
+          <div>{song.title}</div>
+          <div>{song.duration}</div>
+          <div>
+            <button 
+              onClick={() => selectSong(song)}
+            >
+                Select Song
+            </button>
+          </div>
+        </div>
+      )
+    })
+  }
+
+  render() {
+      return <div>{this.renderList()}</div>
+  }
 }
 
-const mapStateToProps = state => {
-    console.log(state)
-    return { songs: state.songs}
-}
+const mapStateToProps = ({ songs }) => ({
+  songs,
+});
 
-export default  connect(mapStateToProps, {selectSong})(SongList)
+const mapDispatchToProps = dispatch => ({
+  selectSong: song => dispatch(selectSong(song)),
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SongList);

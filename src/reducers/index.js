@@ -1,18 +1,23 @@
 import { combineReducers } from 'redux'
+import { NEW_TASK } from '../actions'
 
-const taskListReducer = (state= [], action) => {
-    console.log('action=>', action.type)
-    if (action.type !== 'TASK_LIST') {
-      return action.data
-    } else if (action.type === 'NEW_TASK') {
-      return action.data
-    // } else if (action.type === 'DELETE_TASK') {
-    //   return state
-    }
-    return state
-    
+const initialState = {
+  songs: [],
+};
+
+const taskListReducer = (state = initialState, action) => {
+  switch(action.type) {
+    case NEW_TASK:
+      return {
+        ...state,
+        songs: action.data,
+      }
+
+    default:
+      return state;
+  } 
 }
 
 export default combineReducers({
-    tasks: taskListReducer
+  tasks: taskListReducer,
 })

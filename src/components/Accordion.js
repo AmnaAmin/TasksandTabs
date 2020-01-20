@@ -1,31 +1,46 @@
-import React from "react";
+import React, { Component } from "react";
 import './accordion.css';
 import Dropdown from "./Dropdown";
 
-class Accordion extends React.Component {
-    state = {
-        opened: false,
-        display: false
-    }
-    onToggle = () => {
-        this.setState({ opened: !this.state.opened });
+class Accordion extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      opened: false,
+      display: false
     };
-    changePriority = () => {
-        console.log('Hey I was clicked', this.state.display)
-        this.setState({ display: !this.state.display })
-    }
-    deleteItem () {
-        console.log('Hey I am for delete fn')        
-    }
-    onFnCallBack = (val, id) => {
-        console.log('Hey I have a value ==>', val, id)
-    } 
+  }
+
+  onToggle = () => {
+    this.setState({ opened: !this.state.opened });
+  };
+
+  changePriority = () => {
+    console.log('Hey I was clicked', this.state.display)
+    this.setState({ display: !this.state.display })
+  }
+
+  deleteItem () {
+    console.log('Hey I am for delete fn')        
+  }
+
+  onFnCallBack = (val, id) => {
+    console.log('Hey I have a value ==>', val, id)
+  } 
+
   render() {
     const { id, title } = this.props;
+    const { opened, display } = this.state;
+
+    const titleClass = opened ? 'title is-expanded' : 'title';
+    const displayClass = display ? 'display--true dd-case' : 'display--false dd-case';
+    const contentClass = opened ? 'content is-expanded' : 'content';
+
     return (
       <div>
         <dl className='accordion'>
-          <dt className={this.state.opened ? 'title is-expanded' : 'title'}>
+          <dt className={titleClass}>
             <span className='label' onClick={this.onToggle}>
               {title}
             </span>
@@ -38,17 +53,10 @@ class Accordion extends React.Component {
                   ></span>
                 </i>
 
-                <div
-                  className={
-                    this.state.display
-                      ? 'display--true dd-case'
-                      : 'display--false dd-case'
-                  }
-                >
+                <div className={displayClass}>
                   <div className='dd-item'>
                     <Dropdown id={id} callBack={this.onFnCallBack} pValue="low"/>
                     <Dropdown id={id} callBack={this.onFnCallBack} pValue="high"/>
-
                   </div>
                 </div>
               </div>
@@ -62,7 +70,7 @@ class Accordion extends React.Component {
             </div>
           </dt>
           <dd
-            className={this.state.opened ? 'content is-expanded' : 'content'}
+            className={contentClass}
             onClick={this.onToggle}
           >
             <p>
