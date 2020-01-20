@@ -2,8 +2,12 @@ import React from "react";
 import Accordion from "./Accordion";
 import Form from "./Form";
 import { connect } from "react-redux";
+import { fetchTaskList } from "../actions"
 
 class Card extends React.Component {
+  componentDidMount() {
+    this.props.fetchTaskList()
+  }
     render() {
         let { form, title, info, tasks } = this.props
         return (
@@ -23,8 +27,7 @@ class Card extends React.Component {
 }
 
 const mapStateToProps = state => {
-  // console.log(state)
   return { tasks: state.tasks }
 }
 
-export default connect(mapStateToProps)(Card)
+export default connect(mapStateToProps, {fetchTaskList} )(Card)

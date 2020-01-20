@@ -1,10 +1,17 @@
 import React from "react";
-
+import { connect } from "react-redux";
+import { addNewTask } from "../actions"
 class Form extends React.Component {
+    
     render() {
+        let task = {
+            id : 9,
+            title: "Hello task",
+            priority: "low"
+        }
         return(
             <div>
-                <form onSubmit={this.submit}>
+                <form>
                     <div className="inputGroup">
                         <label className="--label">Title</label>
                         <input className="--input" type="text" name="title"  />
@@ -14,7 +21,9 @@ class Form extends React.Component {
                         <textarea className="--input" type="text" name="description"  />
                     </div>
                     <div className="inputGroup">
-                        <button className="--input" type="submit" name="submitButton" id="submit-button">
+                        <button 
+                        onClick={() => this.props.addNewTask(task)}
+                        className="--input" type="submit" name="submitButton" id="submit-button">
                             Submit
                         </button>
                     </div>
@@ -24,4 +33,10 @@ class Form extends React.Component {
     }
 }
 
-export default Form
+
+const mapStateToProps = state => {
+    // console.log(state)
+    return { tasks: state.tasks }
+}
+  
+export default connect(mapStateToProps, {addNewTask})(Form)

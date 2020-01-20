@@ -1,16 +1,16 @@
 import { combineReducers } from 'redux'
-let list = [
-  { id: '1', title: 'Task 1', description: '', priority: 'low' },
-  { id: '2', title: 'Task 2', description: '', priority: 'high' },
-  { id: '3', title: 'Task 3', description: '', priority: 'low' },
-  { id: '4', title: 'Task 4', description: '', priority: 'high' },
-  { id: '5', title: 'Task 5', description: '', priority: 'archive' }
-] 
-const taskListReducer = (selectedTask = list, action) => {
-     if (action.type === 'TASK_SELECTED') {
-       return action.payload
-     } else 
-    return list
+
+const taskListReducer = (state= [], action) => {
+    console.log('action=>', action.type)
+    if (action.type !== 'TASK_LIST') {
+      return action.data
+    } else if (action.type === 'NEW_TASK') {
+      return action.data
+    // } else if (action.type === 'DELETE_TASK') {
+    //   return state
+    }
+    return state
+    
 }
 
 export default combineReducers({
